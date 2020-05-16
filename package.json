@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.9.14",
     "jsoneditor": "^8.6.6",
     "lodash": "4.17.15",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-system": "^0.15.0"
   },
   "scripts": {
     "start": "react-scripts start",

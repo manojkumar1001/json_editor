@@ -1,85 +1,50 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import JSONEditorReact from './JSONEditorReact';
-import './App.css';
+import JSONEditorReact from "./JSONEditorReact";
+import { Flex, Box } from "react-system";
+import { blue } from "@material-ui/core/colors";
 
-const schema = {
-  title: 'Example Schema',
-  type: 'object',
-  properties: {
-    array: {
-      type: 'array',
-      items: {
-        type: 'number'
-      }
-    },
-    boolean: {
-      type: 'boolean'
-    },
-    number: {
-      type: 'number'
-    }
+const modes = ["tree", "form", "view", "code", "text"];
+const style = {
+  headingDiv: {
+    backgroundColor: blue["A400"],
+    color: "white",
+    margin: 0,
   },
-  required: ['array', 'string', 'boolean']
 };
-
-const json = {
-  'array': [1, 2, 3],
-  'boolean': true,
-  'null': null,
-  'number': 'four',
-  'object': {'a': 'b', 'c': 'd'},
-  'string': 'Hello World'
-};
-
-const modes = ['tree', 'form', 'view', 'code', 'text'];
-
 class App extends Component {
   state = {
-    schema,
-    text: JSON.stringify(json, null, 2),
-    mode: 'tree'
+    text: JSON.stringify({ json: "value" }, null, 2),
+    mode: "tree",
   };
 
   render() {
     return (
-      <div className="app">
-        <h1>JSONEditor React advanced demo</h1>
-        <div className="contents">
-          <div className="mode">
-            mode: <select value={this.state.mode} onChange={this.onModeChangeSelect}>
-              {
-                modes.map(mode => <option key={mode} value={mode}>{mode}</option>)
-              }
-            </select>
-          </div>
+      <>
+        <Flex pl={"25%"} style={style.headingDiv}>
+          <Box>
+            <h1>Levi's Metadata Driven Ingestion Framework</h1>
+          </Box>
+        </Flex>
+        <Flex p={"50px"}>
           <JSONEditorReact
-              schema={this.state.schema}
-              text={this.state.text}
-              mode={this.state.mode}
-              modes={modes}
-              indentation={4}
-              onChangeText={this.onChangeText}
-              onModeChange={this.onModeChange}
+            text={this.state.text}
+            mode={this.state.mode}
+            modes={modes}
+            indentation={4}
+            onChangeText={this.onChangeText}
+            onModeChange={this.onModeChange}
           />
-          <div className="code">
-            <pre>
-              <code>
-                {this.state.text}
-              </code>
-            </pre>
-          </div>
-        </div>
-      </div>
+        </Flex>
+        <Flex width={1}>
+          <Box width={1 / 2}>{this.state.text}</Box>
+        </Flex>
+      </>
     );
   }
 
   onChangeText = (text) => {
     this.setState({ text });
-  };
-
-  onModeChangeSelect = (event) => {
-    this.setState({ mode: event.target.value });
   };
 
   onModeChange = (mode) => {

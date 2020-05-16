@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import isEqual from 'lodash/isEqual';
-import cloneDeep from 'lodash/cloneDeep';
+import React, { Component } from "react";
+import isEqual from "lodash/isEqual";
+import cloneDeep from "lodash/cloneDeep";
 
-import JSONEditor from 'jsoneditor';
-import 'jsoneditor/dist/jsoneditor.css';
+import JSONEditor from "jsoneditor";
+import "jsoneditor/dist/jsoneditor.css";
 
-import './JSONEditorReact.css';
+import "./JSONEditorReact.css";
 
 export default class JSONEditorReact extends Component {
-  componentDidMount () {
+  componentDidMount() {
     // copy all properties into options for the editor
     // (except the properties for the JSONEditorReact component itself)
     const options = Object.assign({}, this.props);
@@ -17,10 +17,10 @@ export default class JSONEditorReact extends Component {
 
     this.jsoneditor = new JSONEditor(this.container, options);
 
-    if ('json' in this.props) {
+    if ("json" in this.props) {
       this.jsoneditor.set(this.props.json);
     }
-    if ('text' in this.props) {
+    if ("text" in this.props) {
       this.jsoneditor.setText(this.props.text);
     }
     this.schema = cloneDeep(this.props.schema);
@@ -28,15 +28,15 @@ export default class JSONEditorReact extends Component {
   }
 
   componentDidUpdate() {
-    if ('json' in this.props) {
+    if ("json" in this.props) {
       this.jsoneditor.update(this.props.json);
     }
 
-    if ('text' in this.props) {
+    if ("text" in this.props) {
       this.jsoneditor.updateText(this.props.text);
     }
 
-    if ('mode' in this.props) {
+    if ("mode" in this.props) {
       this.jsoneditor.setMode(this.props.mode);
     }
 
@@ -51,7 +51,7 @@ export default class JSONEditorReact extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     if (this.jsoneditor) {
       this.jsoneditor.destroy();
     }
@@ -59,7 +59,10 @@ export default class JSONEditorReact extends Component {
 
   render() {
     return (
-        <div className="jsoneditor-react-container" ref={elem => this.container = elem} />
+      <div
+        className="jsoneditor-react-container"
+        ref={(elem) => (this.container = elem)}
+      />
     );
   }
 }
